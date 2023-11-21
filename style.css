@@ -87,8 +87,12 @@ input[type="text"].result{
         font-size: 15px;
 
     }
-    input[type="text"]{
-        padding: 10px 20px;
+    input[type="text"].display{
+        padding: 5px 20px;
+        font-size: 1.5rem;
+    }
+    input[type="text"].result{
+        padding: 5px 20px;
         font-size: 1.5rem;
     }
     body{
