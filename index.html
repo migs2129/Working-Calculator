@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/calculator" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="calc_icon.jpg">
+</head>
+<body style="background-image: url(math.jpg); background-repeat: no-repeat; background-size: 100% 100%; background-attachment: fixed;">
+    <h1 style="font-family: Calculator, sans-serif;">Welcome</h1>
+    <h2 style="font-family: Calculator, sans-serif;">This is my simple calculator</h2>
+    <table>
+        <tr id="cont_res">
+            <td colspan="4">
+                <input type="text" id="display" class ="display"  placeholder="0000000000000000000" style="font-family: Calculator, sans-serif; width: min-content;" disabled>
+                <input type="text" id="result" class="result" style="font-family: Calculator, sans-serif; width: min-content;" disabled> <!-- THIS IS HOW TO CREATE AN INPUT IN HTML-->
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="appendNumber('(')" value="(" id="bt_3"></td>
+            <td><input type="button" onclick="appendNumber(')')" value=")" id="bt_3"></td>
+            <td><input type="button" onclick="del()"value="→" id="bt_3"></td>
+            <td ><input type="button" onclick="clearall()" value="C" id="clear"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="appendNumber(1)" value="1" id="bt_1"></td>
+            <td><input type="button" onclick="appendNumber(2)" value="2" id="bt_1"></td>
+            <td><input type="button" onclick="appendNumber(3)" value="3" id="bt_1"></td>
+            <td><input type="button" onclick="appendOperator('÷')" value ="÷" id="bt_2"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="appendNumber(4)" value="4" id="bt_1"></td>
+            <td><input type="button" onclick="appendNumber(5)" value="5" id="bt_1"></td>
+            <td><input type="button" onclick="appendNumber(6)" value="6" id="bt_1"></td>
+            <td><input type="button" onclick="appendOperator('x')" value ="x" id="bt_2"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="appendNumber(7)" value="7" id="bt_1"></td>
+            <td><input type="button" onclick="appendNumber(8)" value="8" id="bt_1"></td>
+            <td><input type="button" onclick="appendNumber(9)" value="9" id="bt_1"></td>
+            <td><input type="button" onclick="appendOperator('-')" value ="-" id="bt_2"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onclick="appendNumber('.')" value="." id="bt_3"></td>
+            <td><input type="button" onclick="appendNumber(0)" value="0" id="bt_1"></td>
+            <td><input type="button" onclick="appendOperator('+')" value="+" id="bt_2"></td>
+            <td><input type="button" onclick="calculate()" value ="=" id="bt_2"></td>
+        </tr>
+    </table>
+    <script>
+        let display="";
+        let currentInput="";
+        let currentOperator="";
+
+        function clearall() {
+            currentInput='';
+            display='';
+            currentOperator='';
+            document.getElementById('result').value='';
+            document.getElementById('display').value=''
+        }
+        function del() {
+            // get the current input
+            let inputValue = document.getElementById('result').value;
+            //remove the last character
+            inputValue = inputValue.substring(0, inputValue.length -1);
+            // update the input field with the modified value
+            document.getElementById('result').value = inputValue;
+            // update the current input variable
+            currentInput = inputValue;
+
+            let disValue = document.getElementById('display').value;
+            disValue = disValue.substring(0, disValue.length -1);
+            document.getElementById('display').value = disValue;
+            display = disValue;
+        }
+        function appendNumber(number){
+            currentInput+=number;
+            document.getElementById('display').value=currentInput;
+        }
+        /* function appendParenthesis(parenthesis){
+            if (parenthesis === "(") {
+                currentInput += parenthesis; //add the opening parenthesis to the current input
+                document.getElementById('result').value = currentInput;
+                stack.push(parenthesis); //push the opening parenthesis onto the stack
+            } else if (parenthesis === ")") {
+                //check if the stack contains an opening parenthesis
+                if (stack.length > 0 && stack[stack.length - 1] === "(") {
+                    //if there is an opening parenthesis, perform the multiplication within the parenthesis
+                    currentOperator = "*";
+                    currentInput += currentOperator;
+                    document.getElementById('result').value = currentInput;
+                    stack.pop(); //remove the opening parenthesis from stack
+                }
+                //add the closing parenthesis to the current input
+                currentInput += parenthesis;
+                document.getElementById('result').value = currentInput;
+            }  
+        } */
+        function appendOperator(operator){
+                if (operator == "+"){
+                    currentInput += "+";
+                    display +="+"
+                    document.getElementById('display').value = currentInput;
+                }
+                else if (operator == "-"){
+                    currentInput += "-";
+                    display +="-"
+                    document.getElementById('display').value =  currentInput;
+                }
+                else if (operator == "x"){
+                    currentInput += "*";
+                    display +="x"
+                    document.getElementById('display').value =  currentInput;
+                }
+                else if (operator == "÷"){
+                    currentInput += "/";
+                    display +="÷"
+                    document.getElementById('display').value =  currentInput;
+                }
+                else{
+                    alert("Invalid operator");
+                }
+            }
+        function calculate(){
+            const result = eval(currentInput);
+                console.log(result);
+                currentInput = '';
+                document.getElementById('result').value = result;
+                currentInput += result;
+                currentInput.toString();
+                currentOperator= '';
+                currentInput ='';
+        }
+    </script>
+</body>
+</html>
